@@ -29,7 +29,7 @@ class InterpretableCNN:
         self.test_labels=test_labels
         self.class_list=class_list
         self.pca_params='pca_params.pkl'
-        self.transform=SaabTrans(self.train_images, self.train_labels,
+        self.transform=SaabTrans.SaabTrans(self.train_images, self.train_labels,
                             kernel_sizes=FLAGS.kernel_sizes,
                             num_kernels=FLAGS.num_kernels,
                             energy_percent=FLAGS.energy_percent,

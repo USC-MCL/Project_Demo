@@ -54,7 +54,7 @@ class Saab():
         if self.num_kernels == -1:
             self.num_kernels = X.shape[-1]#64
         
-        self.pca = myPCA(n_components=self.num_kernels, isInteger=False)
+        self.pca = myPCA.myPCA(n_components=self.num_kernels, isInteger=False)
         self.pca.fit(X, whichPCA=whichPCA)
 
         kernels = self.pca.Kernels

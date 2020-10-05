@@ -10,7 +10,7 @@ import matplotlib.pyplot as plt
 import saab
 
 class SaabTrans():
-    def __init__(self,train_images, train_labels, kernel_sizes, num_kernels, energy_percent, use_num_images, use_classes):
+    def __init__(self, train_images, train_labels, kernel_sizes, num_kernels, energy_percent, use_num_images, use_classes):
         self.train_images=train_images
         self.train_labels=train_labels
         self.kernel_sizes=self.parse_list_string(kernel_sizes)
@@ -21,9 +21,24 @@ class SaabTrans():
         self.energy_percent=energy_percent
         self.use_num_images=use_num_images
         self.use_classes=use_classes
+        self.images=train_images
+
+    def parse_list_string(self,list_string):
+	    """Convert the class string to list."""
+	    elem_groups=list_string.split(",")
+	    results=[]
+	    for group in elem_groups:
+		    term=group.split("-")
+		    if len(term)==1:
+			    results.append(int(term[0]))
+		    else:
+			    start=int(term[0])
+			    end=int(term[1])
+			    results+=range(start, end+1)
+	    return results
 
     # convert responses to patches representation
-    def window_process(self,samples, kernel_size, stride):#patches?
+    def window_process(self, samples, kernel_size, stride):#patches?
         '''
         Create patches
         :param samples: [num_samples, feature_height, feature_width, feature_channel]
@@ -40,7 +55,7 @@ class SaabTrans():
         return patches
 
 
-    def select_balanced_subset(self,images, labels, use_num_images, use_classes):
+    def select_balanced_subset(self, images, labels, use_num_images, use_classes):
         '''
         select equal number of images from each classes
         '''
@@ -116,14 +131,14 @@ class SaabTrans():
             if not self.num_kernels is None:
                 num_kernel=self.num_kernels[i]
             
-            saab=saab.Saab(num_kernels=num_kernel)
-            saab.fit(sample_patches)
+            saab0=saab.Saab(num_kernels=num_kernel)
+            saab0.fit(sample_patches)
 
             if i==0:
-                transformed=saab.transform(sample_patches,addBias=False)
+                transformed=saab0.transform(sample_patches,addBias=False)
             else:
-                pca_params['Layer_%d/bias'%i]=saab.Bias
-                transformed=saab.transform(sample_patches)
+                pca_params['Layer_%d/bias'%i]=saab0.Bias
+                transformed=saab0.transform(sample_patches)
             
             # Reshape: place back as a 4-D feature map
             sample_images=transformed.reshape(num_samples, h, w,-1)
@@ -132,18 +147,18 @@ class SaabTrans():
             sample_images=block_reduce(sample_images, (1,2,2,1), np.max)
 
             print('Sample patches shape after flatten:', sample_patches.shape)
-            print('Kernel shape:', saab.Kernels.shape)
+            print('Kernel shape:', saab0.Kernels.shape)
             print('Transformed shape:', transformed.shape)
             print('Sample images shape:', sample_images.shape)
             
-            pca_params['Layer_%d/feature_expectation'%i]=saab.Mean0
-            pca_params['Layer_%d/kernel'%i]=saab.Kernels
-            pca_params['Layer_%d/pca_mean'%i]=saab.pcs.mean_
+            pca_params['Layer_%d/feature_expectation'%i]=saab0.Mean0
+            pca_params['Layer_%d/kernel'%i]=saab0.Kernels
+            pca_params['Layer_%d/pca_mean'%i]=saab0.pca.mean_
 
         return pca_params
 
     # Initialize
-    def feature(self,sample_images, pca_params):
+    def feature(self, sample_images, pca_params):
 
         num_layers=pca_params['num_layers']
         self.kernel_sizes=pca_params['kernel_size']
@@ -162,12 +177,14 @@ class SaabTrans():
             # Flatten
             sample_patches=sample_patches.reshape([-1, sample_patches.shape[-1]])
 
-            saab=saab.Saab(Kernels=kernels,trained=True,Mean0=feature_expectation,Bias=pca_params['Layer_%d/bias'%i])
+            #saab0=saab.Saab(Kernels=kernels,trained=True,Mean0=feature_expectation,Bias=pca_params['Layer_%d/bias'%i])
 
             if i==0:
-                transformed=saab.transform(sample_patches,addBias=False)
+                saab0=saab.Saab(Kernels=kernels,trained=True,Mean0=feature_expectation)
+                transformed=saab0.transform(sample_patches,addBias=False)
             else:
-                transformed=saab.transform(sample_patches)
+                saab0=saab.Saab(Kernels=kernels,trained=True,Mean0=feature_expectation,Bias=pca_params['Layer_%d/bias'%i])
+                transformed=saab0.transform(sample_patches)
             
             # Reshape: place back as a 4-D feature map
             num_samples=sample_images.shape[0]

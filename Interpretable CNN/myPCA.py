@@ -13,6 +13,7 @@ class myPCA():
         self.bits = bits
         self.isInteger = isInteger
         self.opType = opType
+        self.mean_ = None
 
     def to_int_(self):
         self.Kernels = np.round(self.Kernels * pow(2, self.bits)).astype(self.opType)
@@ -34,6 +35,7 @@ class myPCA():
         self.Kernels = self.PCA.components_
         self.Energy_ratio = self.PCA.explained_variance_ratio_
         self.Energy = self.PCA.explained_variance_
+        self.mean_ = self.PCA.mean_
         
     def fit(self, X, whichPCA='numpy'):
         S = X.shape
