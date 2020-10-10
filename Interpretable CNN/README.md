@@ -13,10 +13,8 @@ maintained by Min Zhang and Jiali Duan.<br>
     * [Required]  pickle
 
 - [Feedforward Steps] 
-    * Command `python Getkernel.py`, getting convolutional layers kernels
-    * Command `python Getfeature.py`, getting feature after convolution
-    * Command `python Getweight.py`, getting fully connected layers kernels and training accuracy
-    * Command `python mnist_test.py` or `python test.py`, getting test accuracy
+    * Command `python3 main.py cifar10`, running cifar10 demo
+    * Command `python3 main.py mnist`, running mnist demo
 
 #### Adversarial attack
 - [Function]
