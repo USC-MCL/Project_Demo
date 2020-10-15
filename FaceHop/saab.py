@@ -127,23 +127,6 @@ class Saab():
             X = X.astype(self.opType)
         return X
 
-    def transform0(self, X):
-        assert (self.trained == True), "Must call fit first!"
-        X = X.astype('float32')
-
-        self.Bias = np.max(np.linalg.norm(X, axis=1)) * 1 / np.sqrt(X.shape[1])
-        if self.useDC == True:
-            X1, dc = self.remove_mean(X.copy(), axis=1)
-        _, self.Mean0 = self.remove_mean(X1.copy(), axis=0)
-        if self.useDC == True:
-            X -= self.Mean0
-            X += self.Bias
-        X = np.matmul(X, np.transpose(self.Kernels))
-        if self.useDC == True:
-            X[:, 0] -= self.Bias
-        if self.isInteger == True:
-            X = X.astype(self.opType)
-        return X
     
     def inverse_transform(self, X):
         assert (self.trained == True), "Must call fit first!"
