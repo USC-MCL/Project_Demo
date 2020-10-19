@@ -16,7 +16,8 @@ maintained by Min Zhang and Jiali Duan.<br>
     * Command `python3 main.py cifar10`, running cifar10 demo
     * Command `python3 main.py mnist`, running mnist demo
 
-Maximum memory usage: 29806.86328125
+#### Memory Usage
+Maximum memory usage: 29806.86328125 MB
 
 #### Adversarial attack
 - [Function]
