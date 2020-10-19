@@ -4,7 +4,7 @@ maintained by Mozhdeh Rouhsedaghat and Yifan Wang.<br>
 ### Table of Content
 - [Dataset] ( Gray-scale face images of resolution 32 × 32)
     * [LFW] ( train set: 60000, 28x28. Downloaded from Keras)
-- [Installation] (rensorflow, keras, pickle, sklearn and skimage)
+- [Installation] (tensorflow, keras, pickle, sklearn and skimage)
     * [Sklearn Installation] Refer to http://scikit-learn.org/stable/install.html)
     * [Skimage Installation] (Refer to http://scikit-image.org/docs/dev/install.html)
     * [Required]  pickle
