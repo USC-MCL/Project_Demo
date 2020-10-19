@@ -14,7 +14,7 @@ maintained by Mozhdeh Rouhsedaghat and Yifan Wang.<br>
     * Command `python3 main.py`, running LFW demo
 
 #### Memory Usage
-  
+Maximum memory usage: 28969.859375 MB  
 
 ### Contact me
 Mozhdeh Rouhsedaghat (Email: rouhseda@usc.edu)<br>
