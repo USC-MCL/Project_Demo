@@ -16,6 +16,8 @@ maintained by Min Zhang and Jiali Duan.<br>
     * Command `python3 main.py cifar10`, running cifar10 demo
     * Command `python3 main.py mnist`, running mnist demo
 
+Maximum memory usage: 29806.86328125
+
 #### Adversarial attack
 - [Function]
     * BP/ff models are provided for cifar10 and mnist dataset under folder `dataset_structre_model`
