@@ -10,10 +10,10 @@ maintained by Mozhdeh Rouhsedaghat and Yifan Wang.<br>
     * [Required]  pickle
     * [Required]  cv2
 
-- [Feedforward Steps] 
+- [Running the Demo] 
     * Command `python3 main.py`, running LFW demo
 
-#### Me
+#### Memory Usage
   
 
 ### Contact me
