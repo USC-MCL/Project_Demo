@@ -1,4 +1,4 @@
-# Interpretable_CNNs_via_Feedforward_design
+# FaceHop: A Light-Weight Low-Resolution Face Gender Classification Method
 This is an implementation of the paper [FaceHop: A Light-Weight Low-Resolution Face Gender Classification Method](https://arxiv.org/abs/2007.09510),
 maintained by Mozhdeh Rouhsedaghat and Yifan Wang.<br>
 ### Table of Content
@@ -17,6 +17,6 @@ maintained by Mozhdeh Rouhsedaghat and Yifan Wang.<br>
   
 
 ### Contact me
-Jiali Duan (Email: jialidua@usc.edu)<br>
-Min Zhang (Email: zhan980@usc.edu)
+Mozhdeh Rouhsedaghat (Email: rouhseda@usc.edu)<br>
+Yifan Wang (Email: wang608@usc.edu)
 
